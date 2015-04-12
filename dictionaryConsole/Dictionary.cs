@@ -37,6 +37,7 @@ namespace dictionaryConsole
 
         private void textBox_type_in_KeyPress(object sender, KeyPressEventArgs e)
         {
+            status_reset();
             if (e.KeyChar == 13)
             {
                 check_list();
@@ -104,6 +105,11 @@ namespace dictionaryConsole
         }
 
         private void textBox_type_in_TextChanged(object sender, EventArgs e)
+        {
+            status_reset();
+        }
+
+        private void status_reset()
         {
             if (label_check_status.ForeColor != System.Drawing.Color.Black || label_check_status.Text != "Pending...")
             {

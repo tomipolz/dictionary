@@ -59,6 +59,7 @@
             this.textBox_new_word.Name = "textBox_new_word";
             this.textBox_new_word.Size = new System.Drawing.Size(299, 20);
             this.textBox_new_word.TabIndex = 2;
+            this.textBox_new_word.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_new_word_KeyPress);
             // 
             // button_add
             // 

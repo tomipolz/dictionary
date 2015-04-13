@@ -37,7 +37,6 @@ namespace dictionaryConsole
 
             // create new form
             Application.Run(new Dictionary());
-
             //ShowWindow(handle, SW_SHOW);
 
             // exiting console

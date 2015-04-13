@@ -57,6 +57,7 @@
     <Compile Include="WordList.Designer.cs">
       <DependentUpon>WordList.cs</DependentUpon>
     </Compile>
+    <Compile Include="WordListClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

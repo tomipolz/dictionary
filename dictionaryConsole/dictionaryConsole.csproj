@@ -49,7 +49,6 @@
     <Compile Include="Dictionary.Designer.cs">
       <DependentUpon>Dictionary.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WordList.cs">

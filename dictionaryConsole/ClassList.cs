@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace dictionaryConsole
 {
-    interface MyInterface
+    class ClassList
     {
-        void addWord(string newWord);
-
-        void removeWord(int listIndex);
     }
 }

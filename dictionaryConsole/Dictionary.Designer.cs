@@ -138,7 +138,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label label_type_in_info;
         private System.Windows.Forms.Label label_check_status;
-        private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.CheckBox checkBox_case_sensitive;
+        public System.Windows.Forms.Button button_close;
     }
 }

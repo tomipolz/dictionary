@@ -12,21 +12,23 @@ namespace dictionaryConsole
 {
     public partial class WordList : Form
     {
-        public WordList()
+        Dictionary dictionaryForm;
+
+        public WordList(Dictionary dictionaryForm)
         {
             InitializeComponent();
+            this.dictionaryForm = dictionaryForm;
         }
 
         private void WordList_Load(object sender, EventArgs e)
         {
             Console.WriteLine("Word list form launched");
-            listBox_word_list.DataSource = Dictionary.dictionaryForm.wordListClass.words;
+            listBox_word_list.DataSource = dictionaryForm.wordListClass.words;
         }
 
         private void hide_button_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            //this.Close();
+            this.Close();
         }
 
         private void button_add_Click(object sender, EventArgs e)
@@ -62,7 +64,7 @@ namespace dictionaryConsole
             for (int j = 0; j < listBox_word_list.Items.Count; j++)
             {
                 Console.WriteLine("Checking word index " + j.ToString());
-                if (Dictionary.dictionaryForm.wordListClass.words[j] == newWord)
+                if (dictionaryForm.wordListClass.words[j] == newWord)
                 {
                     listBox_word_list.SetSelected(j, true);
                     sameWordFound = true;
@@ -72,7 +74,7 @@ namespace dictionaryConsole
 
             if (!sameWordFound)
             {
-                Dictionary.dictionaryForm.wordListClass.words.Add(newWord);
+                dictionaryForm.wordListClass.words.Add(newWord);
                 refresh_word_list();
                 listBox_word_list.SetSelected(listBox_word_list.Items.IndexOf(newWord), true);
                 Console.WriteLine("Word \"" + newWord + "\" has been added");
@@ -89,7 +91,8 @@ namespace dictionaryConsole
             //I want to remove a selected word from a list at Dictionary.cs
             if (listBox_word_list.Items.Count != 0 && listBox_word_list.SelectedIndex != -1)
             {
-                Dictionary.dictionaryForm.wordListClass.words.RemoveAt(listBox_word_list.SelectedIndex);
+                Console.WriteLine("Removing word \"" + dictionaryForm.wordListClass.words[listBox_word_list.SelectedIndex] + "\"");
+                dictionaryForm.wordListClass.words.RemoveAt(listBox_word_list.SelectedIndex);
                 refresh_word_list();
             }
         }
@@ -97,7 +100,7 @@ namespace dictionaryConsole
         private void refresh_word_list()
         {
             listBox_word_list.DataSource = null;
-            listBox_word_list.DataSource = Dictionary.dictionaryForm.wordListClass.words;
+            listBox_word_list.DataSource = dictionaryForm.wordListClass.words;
             textBox_new_word.Clear();
         }
 

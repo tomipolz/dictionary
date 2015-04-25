@@ -21,23 +21,30 @@ namespace dictionaryConsole
 
         const int SW_HIDE = 0;
         const int SW_SHOW = 5;
+
+        public static void hideConsole()
+        {
+            var handle = GetConsoleWindow();
+            ShowWindow(handle, SW_HIDE);
+        }
+
+        public static void showConsole()
+        {
+            var handle = GetConsoleWindow();
+            ShowWindow(handle, SW_SHOW);
+        }
         //==================================================================================================================
 
         [STAThread]
         static void Main(string[] args)
         {
-            //==============================================================================================================
-            var handle = GetConsoleWindow();
-            //==============================================================================================================
-
             // formy lepiej wygladaja
             Application.EnableVisualStyles();
 
-            //ShowWindow(handle, SW_HIDE);
+            //hideConsole();
 
             // create new form
             Application.Run(new Dictionary());
-            //ShowWindow(handle, SW_SHOW);
 
             // exiting console
             Console.WriteLine("Goodbye");

@@ -39,7 +39,7 @@ namespace dictionaryConsole
 
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string longWordList = System.IO.File.ReadAllText(openFileDialog.FileName);
+                string longWordList = System.IO.File.ReadAllText(openFileDialog.FileName, Encoding.UTF8);
                 string[] splitWordList = longWordList.Split(',');
                 wordListClass.words.Clear();
                 foreach (string word in splitWordList)
@@ -72,7 +72,7 @@ namespace dictionaryConsole
                         longWordList += "," + word;
                     }
                 }
-                File.WriteAllBytes(saveFileDialog.FileName, Encoding.Unicode.GetBytes(longWordList));
+                File.WriteAllBytes(saveFileDialog.FileName, Encoding.UTF8.GetBytes(longWordList));
             }
         }
 

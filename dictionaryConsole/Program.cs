@@ -38,14 +38,17 @@ namespace dictionaryConsole
         [STAThread]
         static void Main(string[] args)
         {
+            Dictionary dictionaryForm = new Dictionary();
+
             // formy lepiej wygladaja
             Application.EnableVisualStyles();
 
             //hideConsole();
 
             // create new form
-            Application.Run(new Dictionary());
-
+            dictionaryForm.Focus();
+            Application.Run(dictionaryForm);
+            
             // exiting console
             Console.WriteLine("Goodbye");
         }

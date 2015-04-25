@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.listBox_word_list = new System.Windows.Forms.ListBox();
-            this.button_hide = new System.Windows.Forms.Button();
+            this.button_close = new System.Windows.Forms.Button();
             this.textBox_new_word = new System.Windows.Forms.TextBox();
-            this.button_add = new System.Windows.Forms.Button();
-            this.button_remove = new System.Windows.Forms.Button();
+            this.button_addWord = new System.Windows.Forms.Button();
+            this.button_removeWord = new System.Windows.Forms.Button();
+            this.button_openFromFile = new System.Windows.Forms.Button();
+            this.button_saveToFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox_word_list
@@ -42,16 +44,17 @@
             this.listBox_word_list.Name = "listBox_word_list";
             this.listBox_word_list.Size = new System.Drawing.Size(299, 472);
             this.listBox_word_list.TabIndex = 0;
+            this.listBox_word_list.DoubleClick += new System.EventHandler(this.listBox_word_list_DoubleClick);
             // 
-            // button_hide
+            // button_close
             // 
-            this.button_hide.Location = new System.Drawing.Point(236, 516);
-            this.button_hide.Name = "button_hide";
-            this.button_hide.Size = new System.Drawing.Size(75, 52);
-            this.button_hide.TabIndex = 1;
-            this.button_hide.Text = "Hide";
-            this.button_hide.UseVisualStyleBackColor = true;
-            this.button_hide.Click += new System.EventHandler(this.hide_button_Click);
+            this.button_close.Location = new System.Drawing.Point(236, 516);
+            this.button_close.Name = "button_close";
+            this.button_close.Size = new System.Drawing.Size(75, 52);
+            this.button_close.TabIndex = 1;
+            this.button_close.Text = "Close";
+            this.button_close.UseVisualStyleBackColor = true;
+            this.button_close.Click += new System.EventHandler(this.close_button_Click);
             // 
             // textBox_new_word
             // 
@@ -61,25 +64,45 @@
             this.textBox_new_word.TabIndex = 2;
             this.textBox_new_word.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_new_word_KeyPress);
             // 
-            // button_add
+            // button_addWord
             // 
-            this.button_add.Location = new System.Drawing.Point(12, 516);
-            this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(75, 23);
-            this.button_add.TabIndex = 3;
-            this.button_add.Text = "Add";
-            this.button_add.UseVisualStyleBackColor = true;
-            this.button_add.Click += new System.EventHandler(this.button_add_Click);
+            this.button_addWord.Location = new System.Drawing.Point(12, 516);
+            this.button_addWord.Name = "button_addWord";
+            this.button_addWord.Size = new System.Drawing.Size(106, 23);
+            this.button_addWord.TabIndex = 3;
+            this.button_addWord.Text = "Add word";
+            this.button_addWord.UseVisualStyleBackColor = true;
+            this.button_addWord.Click += new System.EventHandler(this.button_add_Click);
             // 
-            // button_remove
+            // button_removeWord
             // 
-            this.button_remove.Location = new System.Drawing.Point(12, 545);
-            this.button_remove.Name = "button_remove";
-            this.button_remove.Size = new System.Drawing.Size(75, 23);
-            this.button_remove.TabIndex = 4;
-            this.button_remove.Text = "Remove";
-            this.button_remove.UseVisualStyleBackColor = true;
-            this.button_remove.Click += new System.EventHandler(this.button_remove_Click);
+            this.button_removeWord.Location = new System.Drawing.Point(12, 545);
+            this.button_removeWord.Name = "button_removeWord";
+            this.button_removeWord.Size = new System.Drawing.Size(106, 23);
+            this.button_removeWord.TabIndex = 4;
+            this.button_removeWord.Text = "Remove word";
+            this.button_removeWord.UseVisualStyleBackColor = true;
+            this.button_removeWord.Click += new System.EventHandler(this.button_remove_Click);
+            // 
+            // button_openFromFile
+            // 
+            this.button_openFromFile.Location = new System.Drawing.Point(124, 516);
+            this.button_openFromFile.Name = "button_openFromFile";
+            this.button_openFromFile.Size = new System.Drawing.Size(106, 23);
+            this.button_openFromFile.TabIndex = 5;
+            this.button_openFromFile.Text = "Open from file";
+            this.button_openFromFile.UseVisualStyleBackColor = true;
+            this.button_openFromFile.Click += new System.EventHandler(this.button_openFromFile_Click);
+            // 
+            // button_saveToFile
+            // 
+            this.button_saveToFile.Location = new System.Drawing.Point(124, 545);
+            this.button_saveToFile.Name = "button_saveToFile";
+            this.button_saveToFile.Size = new System.Drawing.Size(106, 23);
+            this.button_saveToFile.TabIndex = 6;
+            this.button_saveToFile.Text = "Save to file";
+            this.button_saveToFile.UseVisualStyleBackColor = true;
+            this.button_saveToFile.Click += new System.EventHandler(this.button_saveToFile_Click);
             // 
             // WordList
             // 
@@ -87,10 +110,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(323, 576);
             this.ControlBox = false;
-            this.Controls.Add(this.button_remove);
-            this.Controls.Add(this.button_add);
+            this.Controls.Add(this.button_saveToFile);
+            this.Controls.Add(this.button_openFromFile);
+            this.Controls.Add(this.button_removeWord);
+            this.Controls.Add(this.button_addWord);
             this.Controls.Add(this.textBox_new_word);
-            this.Controls.Add(this.button_hide);
+            this.Controls.Add(this.button_close);
             this.Controls.Add(this.listBox_word_list);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -106,10 +131,12 @@
         #endregion
 
         public System.Windows.Forms.ListBox listBox_word_list;
-        private System.Windows.Forms.Button button_hide;
+        private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.TextBox textBox_new_word;
-        private System.Windows.Forms.Button button_add;
-        private System.Windows.Forms.Button button_remove;
+        private System.Windows.Forms.Button button_addWord;
+        private System.Windows.Forms.Button button_removeWord;
+        private System.Windows.Forms.Button button_openFromFile;
+        private System.Windows.Forms.Button button_saveToFile;
 
     }
 }

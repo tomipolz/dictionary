@@ -13,6 +13,7 @@ namespace dictionaryConsole
     public partial class WordList : Form
     {
         Dictionary dictionaryForm;
+        EditWord editWordForm = null;
 
         public WordList(Dictionary dictionaryForm)
         {
@@ -24,11 +25,6 @@ namespace dictionaryConsole
         {
             Console.WriteLine("Word list form launched");
             listBox_word_list.DataSource = dictionaryForm.wordListClass.words;
-        }
-
-        private void hide_button_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void button_add_Click(object sender, EventArgs e)
@@ -97,7 +93,7 @@ namespace dictionaryConsole
             }
         }
 
-        private void refresh_word_list()
+        public void refresh_word_list()
         {
             listBox_word_list.DataSource = null;
             listBox_word_list.DataSource = dictionaryForm.wordListClass.words;
@@ -116,6 +112,43 @@ namespace dictionaryConsole
             {
                 textBox_new_word.Clear();
             }
+        }
+
+        private void close_button_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button_openFromFile_Click(object sender, EventArgs e)
+        {
+            dictionaryForm.loadWordListFromDialog();
+            refresh_word_list();
+        }
+
+        private void button_saveToFile_Click(object sender, EventArgs e)
+        {
+            dictionaryForm.saveWordListToDialog();
+        }
+
+        private void listBox_word_list_DoubleClick(object sender, EventArgs e)
+        {
+            if (editWordForm == null && listBox_word_list.SelectedIndex != -1)
+            {
+                editWordForm = new EditWord(this, dictionaryForm, listBox_word_list.SelectedIndex);
+                editWordForm.Show();
+                editWordForm.TopMost = true;
+                editWordForm.FormClosed += new FormClosedEventHandler(editWordForm_closed);
+                editWordForm.textBox_wordEdit.Text = listBox_word_list.Items[listBox_word_list.SelectedIndex].ToString();
+            }
+        }
+
+        private void editWordForm_closed(object sender, FormClosedEventArgs e)
+        {
+            Console.WriteLine("Word editor closed");
+            editWordForm.Dispose();
+            editWordForm = null;
+            this.Enabled = true;
+            this.BringToFront();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,52 @@ namespace dictionaryConsole
         private void Dictionary_Load(object sender, EventArgs e)
         {
             Console.WriteLine("Dictionary Form Launched");
+        }
+
+        // this method is called by wordListForm!
+        public void loadWordListFromDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = "*.txt";
+            openFileDialog.Filter = "Text file|*.txt";
+
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string longWordList = System.IO.File.ReadAllText(openFileDialog.FileName);
+                string[] splitWordList = longWordList.Split(',');
+                wordListClass.words.Clear();
+                foreach (string word in splitWordList)
+                {
+                    wordListClass.words.Add(word);
+                    Console.WriteLine("Word \"" + word + "\" has been added");
+                }
+                Console.WriteLine(wordListClass.words.Count.ToString() + " words have been loaded into list");
+            }
+
+        }
+
+        public void saveWordListToDialog()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = "*txt";
+            saveFileDialog.Filter = "Text file|*.txt";
+
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog.FileName.Length > 0)
+            {
+                string longWordList = "";
+                foreach (string word in wordListClass.words)
+                {
+                    if (longWordList == "")
+                    {
+                        longWordList += word;
+                    }
+                    else
+                    {
+                        longWordList += "," + word;
+                    }
+                }
+                File.WriteAllBytes(saveFileDialog.FileName, Encoding.Unicode.GetBytes(longWordList));
+            }
         }
 
         private void button_close_Click(object sender, EventArgs e)
@@ -70,6 +117,7 @@ namespace dictionaryConsole
         {
             wordListForm.Dispose();
             wordListForm = null;
+            Console.WriteLine("Word list form closed");
         }
 
         private void textBox_type_in_TextChanged(object sender, EventArgs e)
@@ -86,7 +134,7 @@ namespace dictionaryConsole
             }
         }
 
-        private bool isWordEmpty(string newWord)
+        public bool isWordEmpty(string newWord)
         {
             if (newWord == "" || newWord[0] == ' ')
             {
@@ -146,6 +194,11 @@ namespace dictionaryConsole
                     label_check_status.ForeColor = System.Drawing.Color.Red;
                 }
             }
+        }
+
+        private void button_open_file_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

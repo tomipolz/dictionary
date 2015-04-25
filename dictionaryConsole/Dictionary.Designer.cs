@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button_all_words = new System.Windows.Forms.Button();
+            this.button_allWords = new System.Windows.Forms.Button();
             this.textBox_type_in = new System.Windows.Forms.TextBox();
             this.button_check = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -38,16 +38,16 @@
             this.checkBox_case_sensitive = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // button_all_words
+            // button_allWords
             // 
-            this.button_all_words.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_all_words.Location = new System.Drawing.Point(12, 320);
-            this.button_all_words.Name = "button_all_words";
-            this.button_all_words.Size = new System.Drawing.Size(105, 23);
-            this.button_all_words.TabIndex = 6;
-            this.button_all_words.Text = "Show all words";
-            this.button_all_words.UseVisualStyleBackColor = true;
-            this.button_all_words.Click += new System.EventHandler(this.button_all_words_Click);
+            this.button_allWords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_allWords.Location = new System.Drawing.Point(12, 320);
+            this.button_allWords.Name = "button_allWords";
+            this.button_allWords.Size = new System.Drawing.Size(105, 23);
+            this.button_allWords.TabIndex = 6;
+            this.button_allWords.Text = "Show all words";
+            this.button_allWords.UseVisualStyleBackColor = true;
+            this.button_allWords.Click += new System.EventHandler(this.button_all_words_Click);
             // 
             // textBox_type_in
             // 
@@ -118,7 +118,7 @@
             this.Controls.Add(this.label_type_in_info);
             this.Controls.Add(this.button_check);
             this.Controls.Add(this.textBox_type_in);
-            this.Controls.Add(this.button_all_words);
+            this.Controls.Add(this.button_allWords);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -132,7 +132,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button_all_words;
+        private System.Windows.Forms.Button button_allWords;
         private System.Windows.Forms.TextBox textBox_type_in;
         private System.Windows.Forms.Button button_check;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;

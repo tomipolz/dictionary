@@ -97,6 +97,10 @@ namespace dictionaryConsole
             {
                 textBox_type_in.Clear();
             }
+            else if (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
 
         private void button_all_words_Click(object sender, EventArgs e)
@@ -194,11 +198,6 @@ namespace dictionaryConsole
                     label_check_status.ForeColor = System.Drawing.Color.Red;
                 }
             }
-        }
-
-        private void button_open_file_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

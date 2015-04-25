@@ -73,6 +73,8 @@
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_edit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditWord";
             this.Text = "EditWord";
             this.Load += new System.EventHandler(this.EditWord_Load);

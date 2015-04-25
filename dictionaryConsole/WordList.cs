@@ -54,42 +54,53 @@ namespace dictionaryConsole
 
         private void addWordToList(string newWord)
         {
-            Console.WriteLine("Adding word : " +newWord);
-            bool sameWordFound = false;
-
-            for (int j = 0; j < listBox_word_list.Items.Count; j++)
+            if (editWordForm == null)
             {
-                Console.WriteLine("Checking word index " + j.ToString());
-                if (dictionaryForm.wordListClass.words[j] == newWord)
+                Console.WriteLine("Adding word : " + newWord);
+                bool sameWordFound = false;
+
+                for (int j = 0; j < listBox_word_list.Items.Count; j++)
                 {
-                    listBox_word_list.SetSelected(j, true);
-                    sameWordFound = true;
-                    break;
+                    Console.WriteLine("Checking word index " + j.ToString());
+                    if (dictionaryForm.wordListClass.words[j] == newWord)
+                    {
+                        listBox_word_list.SetSelected(j, true);
+                        sameWordFound = true;
+                        break;
+                    }
                 }
-            }
 
-            if (!sameWordFound)
-            {
-                dictionaryForm.wordListClass.words.Add(newWord);
-                refresh_word_list();
-                listBox_word_list.SetSelected(listBox_word_list.Items.IndexOf(newWord), true);
-                Console.WriteLine("Word \"" + newWord + "\" has been added");
+                if (!sameWordFound)
+                {
+                    dictionaryForm.wordListClass.words.Add(newWord);
+                    refresh_word_list();
+                    listBox_word_list.SetSelected(listBox_word_list.Items.IndexOf(newWord), true);
+                    Console.WriteLine("Word \"" + newWord + "\" has been added");
+                }
+                else
+                {
+                    Console.WriteLine("Word \"" + newWord + "\" already exists");
+                    MessageBox.Show("Word: \"" + newWord + "\" already exists");
+                }
             }
             else
             {
-                Console.WriteLine("Word \"" + newWord + "\" already exists");
-                MessageBox.Show("Word: \"" + newWord + "\" already exists");
+                editWordForm.BringToFront();
             }
         }
 
         private void button_remove_Click(object sender, EventArgs e)
         {
             //I want to remove a selected word from a list at Dictionary.cs
-            if (listBox_word_list.Items.Count != 0 && listBox_word_list.SelectedIndex != -1)
+            if (listBox_word_list.Items.Count != 0 && listBox_word_list.SelectedIndex != -1 && editWordForm == null)
             {
                 Console.WriteLine("Removing word \"" + dictionaryForm.wordListClass.words[listBox_word_list.SelectedIndex] + "\"");
                 dictionaryForm.wordListClass.words.RemoveAt(listBox_word_list.SelectedIndex);
                 refresh_word_list();
+            }
+            else if (editWordForm != null)
+            {
+                editWordForm.BringToFront();
             }
         }
 
@@ -111,6 +122,10 @@ namespace dictionaryConsole
             else if (e.KeyChar == 27)
             {
                 textBox_new_word.Clear();
+            }
+            else if (!char.IsDigit(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != ' ')
+            {
+                e.Handled = true;
             }
         }
 
@@ -136,9 +151,12 @@ namespace dictionaryConsole
             {
                 editWordForm = new EditWord(this, dictionaryForm, listBox_word_list.SelectedIndex);
                 editWordForm.Show();
-                editWordForm.TopMost = true;
                 editWordForm.FormClosed += new FormClosedEventHandler(editWordForm_closed);
                 editWordForm.textBox_wordEdit.Text = listBox_word_list.Items[listBox_word_list.SelectedIndex].ToString();
+            }
+            else
+            {
+                editWordForm.BringToFront();
             }
         }
 
@@ -147,7 +165,6 @@ namespace dictionaryConsole
             Console.WriteLine("Word editor closed");
             editWordForm.Dispose();
             editWordForm = null;
-            this.Enabled = true;
             this.BringToFront();
         }
     }
